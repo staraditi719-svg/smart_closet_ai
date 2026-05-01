@@ -1,0 +1,10 @@
+fastapi
+uvicorn
+python-dotenv
+google-generativeai
+colorthief
+webcolors
+pillow
+requests
+aiofiles
+python-multipart

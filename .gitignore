@@ -1,0 +1,15 @@
+# Environment files - NEVER push these
+backend/.env
+backend/wardrobe.db
+backend/__pycache__/
+backend/routes/__pycache__/
+backend/uploads/
+
+# Node modules
+frontend/node_modules/
+frontend/dist/
+
+# Python cache
+*.pyc
+*.pyo
+__pycache__/
