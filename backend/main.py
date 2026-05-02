@@ -3,7 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from dotenv import load_dotenv
 from database import init_db
-from routes import wardrobe, recommend, weather, analytics,profile,calendar
+from routes import wardrobe, recommend, weather, analytics,profile,calendar,auth
 import os
 
 load_dotenv()
@@ -27,6 +27,7 @@ app.include_router(weather.router, prefix="/api/weather")
 app.include_router(analytics.router, prefix="/api/analytics")
 app.include_router(profile.router, prefix="/api/profile")
 app.include_router(calendar.router, prefix="/api/calendar")
+app.include_router(auth.router, prefix="/api/auth")
 
 @app.on_event("startup")
 def startup():

@@ -85,3 +85,22 @@ I learned a lot building this. Some parts were easy, some were frustrating — e
 ## Author
 
 Aditi — BTech 3rd year student who likes building things that actually solve problems.
+## What I plan to add next
+
+## Better Database
+Right now the app uses SQLite which works great for one person. If thousands of people use this app at the same time, I would switch to PostgreSQL which is built to handle many users simultaneously without slowing down.
+
+## Cloud Image Storage
+Currently clothing images are saved on the server's local storage. For a real deployed app, I would move images to AWS S3 or Cloudinary — this way images load faster from anywhere in the world and don't get lost if the server restarts.
+
+## Mobile App
+The web app already works on mobile browsers, but a dedicated mobile app built with React Native would give a much better experience — faster loading, camera access to directly photograph clothes, and push notifications for daily outfit reminders.
+
+## Social Features
+Users could share their outfit combinations with friends, follow other users for style inspiration, and rate each other's outfits. Think of it like Instagram but specifically for fashion and outfits.
+
+## Virtual Try-On
+Upload your photo and see how an outfit actually looks on you before wearing it — using AI image generation.
+
+## Price Tracker
+Add the price of each clothing item when uploading. The app tracks how many times you wear each item and calculates cost-per-wear — helping you make smarter shopping decisions.

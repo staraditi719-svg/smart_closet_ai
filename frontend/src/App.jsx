@@ -1,4 +1,5 @@
-import { useState } from "react"
+import Login from "./components/Login"
+import { useState, useEffect } from "react"
 import Upload from "./components/Upload"
 import Wardrobe from "./components/Wardrobe"
 import Recommend from "./components/Recommend"
@@ -14,6 +15,25 @@ import "./App.css"
 function App() {
   const [activeTab, setActiveTab] = useState("home")
   const [refresh, setRefresh] = useState(0)
+  const [user, setUser] = useState(null)
+
+  useEffect(() => {
+    const token = localStorage.getItem("token")
+    const userName = localStorage.getItem("userName")
+    if (token) setUser({ token, name: userName })
+  }, [])
+
+  const handleLogin = (userData) => {
+    setUser(userData)
+  }
+
+  const handleLogout = () => {
+    localStorage.removeItem("token")
+    localStorage.removeItem("userName")
+    setUser(null)
+  }
+
+  if (!user) return <Login onLogin={handleLogin} />
 
   return (
     <div className="app">
@@ -31,6 +51,26 @@ function App() {
           <button onClick={() => setActiveTab("history")} className={activeTab === "history" ? "active" : ""}>History</button>
           <button onClick={() => setActiveTab("profile")} className={activeTab === "profile" ? "active" : ""}>Profile</button>
           <button onClick={() => setActiveTab("calendar")} className={activeTab === "calendar" ? "active" : ""}>Calendar</button>
+        </div>
+        <div style={{display:"flex", alignItems:"center", gap:"12px"}}>
+          <span style={{fontSize:"13px", color:"#9CA3AF"}}>
+            Hi, {user?.name || "User"}!
+          </span>
+          <button
+            onClick={handleLogout}
+            style={{
+              background:"rgba(239,68,68,0.15)",
+              border:"1px solid rgba(239,68,68,0.3)",
+              color:"#FCA5A5",
+              fontSize:"12px",
+              padding:"6px 14px",
+              borderRadius:"20px",
+              cursor:"pointer",
+              boxShadow:"none"
+            }}
+          >
+            Logout
+          </button>
         </div>
       </nav>
 
@@ -108,7 +148,6 @@ function App() {
       <ChatBubble />
 
     </div>
-  
   )
 }
 
