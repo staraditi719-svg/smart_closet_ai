@@ -7,7 +7,8 @@ from datetime import date, timedelta
 
 load_dotenv()
 router = APIRouter()
-client = Groq(api_key=os.getenv("GROQ_API_KEY"))
+groq_key = os.getenv("GROQ_API_KEY", "")
+client = Groq(api_key=groq_key) if groq_key else None
 
 @router.get("/")
 def get_calendar():
