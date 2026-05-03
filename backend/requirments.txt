@@ -8,3 +8,6 @@ pillow
 requests
 aiofiles
 python-multipart
+passlib
+python-jose
+bcrypt
