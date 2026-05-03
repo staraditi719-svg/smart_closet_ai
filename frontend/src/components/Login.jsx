@@ -1,13 +1,17 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import axios from "axios"
 
-function Login({ onLogin }) {
-  const [isRegister, setIsRegister] = useState(false)
+function Login({ onLogin, isRegister: initialRegister }) {
+  const [isRegister, setIsRegister] = useState(initialRegister ?? false)
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [name, setName] = useState("")
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState("")
+
+  useEffect(() => {
+    setIsRegister(initialRegister ?? false)
+  }, [initialRegister])
 
   const handleSubmit = async () => {
     if (!email || !password) return setError("Please fill all fields!")
@@ -50,6 +54,20 @@ function Login({ onLogin }) {
         width:"100%", maxWidth:"400px",
         margin:"0 16px"
       }}>
+        {/* Back to landing */}
+        <div style={{textAlign:"center", marginBottom:"16px"}}>
+          <span
+            onClick={() => window.location.reload()}
+            style={{
+              fontSize:"12px", color:"#6B7280",
+              cursor:"pointer", display:"inline-flex",
+              alignItems:"center", gap:"4px"
+            }}
+          >
+            ← Back to home
+          </span>
+        </div>
+
         {/* Logo */}
         <div style={{textAlign:"center", marginBottom:"32px"}}>
           <div style={{fontSize:"48px", marginBottom:"12px"}}>👗</div>

@@ -1,4 +1,5 @@
 import Login from "./components/Login"
+import LandingPage from "./components/LandingPage"
 import { useState, useEffect } from "react"
 import Upload from "./components/Upload"
 import Wardrobe from "./components/Wardrobe"
@@ -16,24 +17,57 @@ function App() {
   const [activeTab, setActiveTab] = useState("home")
   const [refresh, setRefresh] = useState(0)
   const [user, setUser] = useState(null)
+  const [showLanding, setShowLanding] = useState(true)
+  const [showLogin, setShowLogin] = useState(false)
+  const [isRegister, setIsRegister] = useState(false)
 
   useEffect(() => {
     const token = localStorage.getItem("token")
     const userName = localStorage.getItem("userName")
-    if (token) setUser({ token, name: userName })
+    if (token) {
+      setUser({ token, name: userName })
+      setShowLanding(false)
+    }
   }, [])
 
   const handleLogin = (userData) => {
     setUser(userData)
+    setShowLanding(false)
+    setShowLogin(false)
   }
 
   const handleLogout = () => {
     localStorage.removeItem("token")
     localStorage.removeItem("userName")
     setUser(null)
+    setShowLanding(true)
+    setShowLogin(false)
   }
 
-  if (!user) return <Login onLogin={handleLogin} />
+  // Show landing page
+  if (showLanding) return (
+    <LandingPage
+      onGetStarted={() => {
+        setShowLanding(false)
+        setShowLogin(true)
+        setIsRegister(true)
+      }}
+      onLogin={() => {
+        setShowLanding(false)
+        setShowLogin(true)
+        setIsRegister(false)
+      }}
+      onExplore={() => {
+        setShowLanding(false)
+        setShowLogin(false)
+      }}
+    />
+  )
+
+  // Show login/register
+  if (showLogin && !user) return (
+    <Login onLogin={handleLogin} isRegister={isRegister} />
+  )
 
   return (
     <div className="app">
@@ -53,24 +87,53 @@ function App() {
           <button onClick={() => setActiveTab("calendar")} className={activeTab === "calendar" ? "active" : ""}>Calendar</button>
         </div>
         <div style={{display:"flex", alignItems:"center", gap:"12px"}}>
-          <span style={{fontSize:"13px", color:"#9CA3AF"}}>
-            Hi, {user?.name || "User"}!
-          </span>
-          <button
-            onClick={handleLogout}
-            style={{
-              background:"rgba(239,68,68,0.15)",
-              border:"1px solid rgba(239,68,68,0.3)",
-              color:"#FCA5A5",
-              fontSize:"12px",
-              padding:"6px 14px",
-              borderRadius:"20px",
-              cursor:"pointer",
-              boxShadow:"none"
-            }}
-          >
-            Logout
-          </button>
+          {user ? (
+            <>
+              <span style={{fontSize:"13px", color:"#9CA3AF"}}>
+                Hi, {user?.name || "User"}!
+              </span>
+              <button
+                onClick={handleLogout}
+                style={{
+                  background:"rgba(239,68,68,0.15)",
+                  border:"1px solid rgba(239,68,68,0.3)",
+                  color:"#FCA5A5",
+                  fontSize:"12px",
+                  padding:"6px 14px",
+                  borderRadius:"20px",
+                  cursor:"pointer",
+                  boxShadow:"none"
+                }}
+              >Logout</button>
+            </>
+          ) : (
+            <>
+              <button
+                onClick={() => { setShowLogin(true); setIsRegister(false) }}
+                style={{
+                  background:"transparent",
+                  border:"1px solid rgba(255,255,255,0.2)",
+                  color:"#C0C0C0",
+                  fontSize:"12px",
+                  padding:"6px 14px",
+                  borderRadius:"20px",
+                  cursor:"pointer"
+                }}
+              >Login</button>
+              <button
+                onClick={() => { setShowLogin(true); setIsRegister(true) }}
+                style={{
+                  background:"linear-gradient(135deg, #8B5CF6, #6D28D9)",
+                  border:"none",
+                  color:"white",
+                  fontSize:"12px",
+                  padding:"6px 14px",
+                  borderRadius:"20px",
+                  cursor:"pointer"
+                }}
+              >Sign Up</button>
+            </>
+          )}
         </div>
       </nav>
 
@@ -102,7 +165,6 @@ function App() {
             </div>
           </div>
 
-          {/* STATS */}
           <div className="stats-row">
             <div className="stat-card">
               <div style={{fontSize:"11px", color:"#6B7280", marginBottom:"8px"}}>Total Clothes</div>
@@ -126,13 +188,10 @@ function App() {
             </div>
           </div>
 
-          {/* OUTFIT OF THE DAY */}
           <OutfitOfTheDay />
-
         </div>
       )}
 
-      {/* CONTENT */}
       <div className="content">
         {activeTab === "wardrobe" && <Wardrobe refresh={refresh} />}
         {activeTab === "upload" && <Upload onUpload={() => setRefresh(r => r + 1)} />}
@@ -144,9 +203,7 @@ function App() {
         {activeTab === "calendar" && <OutfitCalendar />}
       </div>
 
-      {/* AI CHAT BUBBLE */}
       <ChatBubble />
-
     </div>
   )
 }
