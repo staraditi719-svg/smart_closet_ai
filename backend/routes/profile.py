@@ -56,7 +56,7 @@ def personalized_recommendation(occasion: str = "casual", season: str = "summer"
         return {"recommendation": "No clothes found! Please upload some clothes first."}
 
     clothes_text = "\n".join([
-        f"- {c['category']} ({c['color']})" for c in clothes
+        f"- {c['main_category']} ({c['color']})" for c in clothes
     ])
 
     if profile:
@@ -92,7 +92,7 @@ Keep it friendly and personal!
 
     try:
         response = client.chat.completions.create(
-           model="llama-3.1-8b-instant",
+            model="llama-3.1-8b-instant",
             messages=[{"role": "user", "content": prompt}]
         )
         return {"recommendation": response.choices[0].message.content}

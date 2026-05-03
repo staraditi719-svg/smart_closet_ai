@@ -12,7 +12,7 @@ def get_analytics():
 
     # Count by category
     categories = conn.execute(
-        "SELECT category, COUNT(*) as count FROM clothes GROUP BY category ORDER BY count DESC"
+        "SELECT main_category, COUNT(*) as count FROM clothes GROUP BY main_category ORDER BY count DESC"
     ).fetchall()
 
     # Count by color

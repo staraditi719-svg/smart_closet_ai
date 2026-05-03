@@ -26,7 +26,7 @@ def get_recommendation(occasion: str = "casual", season: str = "summer"):
 
     clothes_list = []
     for c in clothes:
-        clothes_list.append(f"- {c['category']} ({c['color']}) for {c['occasion']} in {c['season']}")
+        clothes_list.append(f"- {c['main_category']} ({c['color']}) for {c['occasion']} in {c['season']}")
 
     clothes_text = "\n".join(clothes_list)
 
@@ -86,7 +86,7 @@ Answer this fashion question briefly and helpfully in 2-3 sentences:
 
     try:
         response = client.chat.completions.create(
-           model="llama-3.1-8b-instant",
+            model="llama-3.1-8b-instant",
             messages=[{"role": "user", "content": prompt}]
         )
         return {"reply": response.choices[0].message.content}
@@ -139,7 +139,7 @@ def outfit_of_the_day():
             }
 
         clothes_text = "\n".join([
-            f"- {c['category']} ({c['color']})" for c in clothes
+            f"- {c['main_category']} ({c['color']})" for c in clothes
         ])
 
         prompt = f"""You are a personal fashion stylist.
@@ -158,7 +158,7 @@ Keep it friendly, short and practical. Start with "Good morning! Today's outfit:
 """
 
         response = client.chat.completions.create(
-           model="llama-3.1-8b-instant",
+            model="llama-3.1-8b-instant",
             messages=[{"role": "user", "content": prompt}]
         )
         recommendation_text = response.choices[0].message.content
@@ -178,4 +178,4 @@ Keep it friendly, short and practical. Start with "Good morning! Today's outfit:
         }
 
     except Exception as e:
-        return {"recommendation": f"Error: {str(e)}", "temp": 0, "season": "unknown"}
+        return {"recommendation": f"Error: {str(e)}", "temp": 0, "season": "unknown"};

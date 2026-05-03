@@ -27,7 +27,6 @@ def plan_outfit(
 ):
     conn = get_connection()
 
-    # Check if already planned
     existing = conn.execute(
         "SELECT * FROM outfit_calendar WHERE date = ?", (date_str,)
     ).fetchone()
@@ -42,7 +41,7 @@ def plan_outfit(
         return {"message": "No clothes found for this occasion and season!"}
 
     clothes_text = "\n".join([
-        f"- {c['category']} ({c['color']})" for c in clothes
+        f"- {c['main_category']} ({c['color']})" for c in clothes
     ])
 
     prompt = f"""You are a fashion stylist.
