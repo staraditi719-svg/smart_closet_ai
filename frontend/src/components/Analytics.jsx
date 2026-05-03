@@ -6,7 +6,7 @@ function Analytics() {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    axios.get("http://127.0.0.1:8000/api/analytics/")
+    axios.get("https://smart-closet-ai-backend.onrender.com/api/analytics/")
       .then(res => {
         setData(res.data)
         setLoading(false)

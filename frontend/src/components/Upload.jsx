@@ -99,7 +99,7 @@ function Upload({ onUpload }) {
 
     setLoading(true)
     try {
-      const res = await axios.post("http://127.0.0.1:8000/api/wardrobe/upload", formData)
+      const res = await axios.post("https://smart-closet-ai-backend.onrender.com/api/wardrobe/upload", formData)
       setMessage(`Uploaded! Color detected: ${res.data.color}`)
       onUpload()
       setFile(null)

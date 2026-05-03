@@ -6,7 +6,7 @@ function History() {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    axios.get("http://127.0.0.1:8000/api/recommend/history")
+    axios.get("https://smart-closet-ai-backend.onrender.com/api/recommend/history")
       .then(res => {
         setHistory(res.data)
         setLoading(false)

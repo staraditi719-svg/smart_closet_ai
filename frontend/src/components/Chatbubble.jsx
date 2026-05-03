@@ -18,7 +18,7 @@ function ChatBubble() {
     setLoading(true)
 
     try {
-      const res = await axios.get("http://127.0.0.1:8000/api/recommend/chat", {
+      const res = await axios.get("https://smart-closet-ai-backend.onrender.com/api/recommend/chat", {
         params: { message: input }
       })
       setMessages(prev => [...prev, { role: "ai", text: res.data.reply }])

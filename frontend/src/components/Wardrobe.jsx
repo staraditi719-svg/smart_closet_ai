@@ -12,7 +12,7 @@ function Wardrobe({ refresh }) {
 
   const fetchClothes = async () => {
     try {
-      const res = await axios.get("http://127.0.0.1:8000/api/wardrobe/all")
+      const res = await axios.get("https://smart-closet-ai-backend.onrender.com/api/wardrobe/all")
       setClothes(res.data)
       setFiltered(res.data)
     } catch (err) {
@@ -23,7 +23,7 @@ function Wardrobe({ refresh }) {
 
   const deleteCloth = async (id) => {
     try {
-      await axios.delete(`http://127.0.0.1:8000/api/wardrobe/${id}`)
+      await axios.delete(`https://smart-closet-ai-backend.onrender.com/api/wardrobe/${id}`)
       fetchClothes()
     } catch (err) {
       console.error("Failed to delete")
@@ -177,7 +177,7 @@ function Wardrobe({ refresh }) {
             return (
               <div key={cloth.id} className="cloth-card">
                 <img
-                  src={`http://127.0.0.1:8000/uploads/${cloth.filename}`}
+                  src={`https://smart-closet-ai-backend.onrender.com/uploads/${cloth.filename}`}
                   alt={subCat}
                 />
 

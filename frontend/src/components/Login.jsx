@@ -19,8 +19,8 @@ function Login({ onLogin, isRegister: initialRegister }) {
     setError("")
     try {
       const url = isRegister
-        ? "http://127.0.0.1:8000/api/auth/register"
-        : "http://127.0.0.1:8000/api/auth/login"
+        ? "https://smart-closet-ai-backend.onrender.com/api/auth/register"
+        : "https://smart-closet-ai-backend.onrender.com/api/auth/login"
       const res = await axios.post(url, null, {
         params: isRegister ? { email, password, name } : { email, password }
       })
