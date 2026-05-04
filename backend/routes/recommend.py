@@ -7,14 +7,11 @@ from datetime import date
 import requests
 
 load_dotenv()
-
 router = APIRouter()
-
-client = Groq(api_key=os.getenv("GROQ_API_KEY"))
-
 
 @router.get("/")
 def get_recommendation(occasion: str = "casual", season: str = "summer"):
+    client = Groq(api_key=os.getenv("GROQ_API_KEY"))
     conn = get_connection()
     clothes = conn.execute(
         "SELECT * FROM clothes WHERE occasion = ? AND season = ?",
@@ -52,7 +49,6 @@ Keep it short, friendly and practical.
         )
         recommendation_text = response.choices[0].message.content
 
-        # Save to history
         conn = get_connection()
         conn.execute(
             "INSERT INTO outfit_history (occasion, season, recommendation) VALUES (?, ?, ?)",
@@ -78,6 +74,7 @@ def get_history():
 
 @router.get("/chat")
 def chat_with_stylist(message: str = ""):
+    client = Groq(api_key=os.getenv("GROQ_API_KEY"))
     if not message:
         return {"reply": "Please ask me something!"}
 
@@ -97,6 +94,7 @@ Answer this fashion question briefly and helpfully in 2-3 sentences:
 
 @router.get("/outfit-of-the-day")
 def outfit_of_the_day():
+    client = Groq(api_key=os.getenv("GROQ_API_KEY"))
     try:
         lat, lon = 26.4499, 80.3319
         url = f"https://api.open-meteo.com/v1/forecast?latitude={lat}&longitude={lon}&current=temperature_2m,weathercode"
@@ -179,4 +177,4 @@ Keep it friendly, short and practical. Start with "Good morning! Today's outfit:
         }
 
     except Exception as e:
-        return {"recommendation": f"Error: {str(e)}", "temp": 0, "season": "unknown"};
+        return {"recommendation": f"Error: {str(e)}", "temp": 0, "season": "unknown"}

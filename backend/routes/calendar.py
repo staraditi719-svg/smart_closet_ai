@@ -7,8 +7,6 @@ from datetime import date, timedelta
 
 load_dotenv()
 router = APIRouter()
-client = Groq(api_key=os.getenv("GROQ_API_KEY"))
-
 
 @router.get("/")
 def get_calendar():
@@ -26,6 +24,7 @@ def plan_outfit(
     season: str = "summer",
     note: str = ""
 ):
+    client = Groq(api_key=os.getenv("GROQ_API_KEY"))
     conn = get_connection()
 
     existing = conn.execute(

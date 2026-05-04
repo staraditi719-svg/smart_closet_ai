@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 router = APIRouter()
-client = Groq(api_key=os.getenv("GROQ_API_KEY"))
+
 @router.get("/")
 def get_profile():
     conn = get_connection()
@@ -39,6 +39,7 @@ def save_profile(
 
 @router.get("/recommend")
 def personalized_recommendation(occasion: str = "casual", season: str = "summer"):
+    client = Groq(api_key=os.getenv("GROQ_API_KEY"))
     conn = get_connection()
 
     profile = conn.execute(
