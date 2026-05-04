@@ -6,8 +6,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 router = APIRouter()
-groq_key = os.getenv("GROQ_API_KEY", "")
-client = Groq(api_key=groq_key) if groq_key else None
+client = Groq(api_key=os.getenv("GROQ_API_KEY"))
 @router.get("/")
 def get_profile():
     conn = get_connection()
