@@ -36,3 +36,12 @@ def startup():
 @app.get("/")
 def root():
     return {"message": "Smart Wardrobe API running ✅"}
+
+@app.get("/test-env")
+def test_env():
+    key = os.getenv("GROQ_API_KEY")
+    return {
+        "key_exists": key is not None,
+        "key_length": len(key) if key else 0,
+        "key_start": key[:8] if key else "none"
+    }
