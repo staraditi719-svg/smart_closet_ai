@@ -1,4 +1,4 @@
-import "./LandingPage.css"
+import "./landingpage.css"
 
 function LandingPage({ onGetStarted, onLogin, onExplore }) {
 
