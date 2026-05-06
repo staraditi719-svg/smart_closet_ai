@@ -12,7 +12,7 @@ function Recommend() {
     setLoading(true)
     setRecommendation("")
     try {
-      const res = await axios.get("https://smart-closet-ai-backend.onrender.com/api/recommend/", {
+      const res = await axios.get("https://smart-closet-ai.onrender.com/api/recommend/", {
         params: { occasion, season }
       })
       setRecommendation(res.data.recommendation)

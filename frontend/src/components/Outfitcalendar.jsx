@@ -20,7 +20,7 @@ function OutfitCalendar() {
 
   const fetchCalendar = async () => {
     try {
-      const res = await axios.get("https://smart-closet-ai-backend.onrender.com/api/calendar/")
+      const res = await axios.get("https://smart-closet-ai.onrender.com/api/calendar/")
       setCalendar(res.data)
     } catch {}
   }
@@ -31,7 +31,7 @@ function OutfitCalendar() {
     setRecommendation("")
     setMessage("")
     try {
-      const res = await axios.post("https://smart-closet-ai-backend.onrender.com/api/calendar/plan", null, {
+      const res = await axios.post("https://smart-closet-ai.onrender.com/api/calendar/plan", null, {
         params: { date_str: selectedDate, occasion, season, note }
       })
       setMessage(res.data.message)
@@ -45,7 +45,7 @@ function OutfitCalendar() {
 
   const deletePlan = async (dateStr) => {
     try {
-      await axios.delete(`https://smart-closet-ai-backend.onrender.com/api/calendar/${dateStr}`)
+      await axios.delete(`https://smart-closet-ai.onrender.com/api/calendar/${dateStr}`)
       fetchCalendar()
     } catch {}
   }

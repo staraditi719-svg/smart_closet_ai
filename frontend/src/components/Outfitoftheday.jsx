@@ -7,7 +7,7 @@ function OutfitOfTheDay() {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    axios.get("https://smart-closet-ai-backend.onrender.com/api/recommend/outfit-of-the-day")
+    axios.get("https://smart-closet-ai.onrender.com/api/recommend/outfit-of-the-day")
       .then(res => {
         setData(res.data)
         setLoading(false)

@@ -13,7 +13,7 @@ function Weather() {
     setData(null)
     setError("")
     try {
-      const res = await axios.get("https://smart-closet-ai-backend.onrender.com/api/weather/", {
+      const res = await axios.get("https://smart-closet-ai.onrender.com/api/weather/", {
         params: { city }
       })
       if (res.data.error) {
@@ -193,7 +193,7 @@ function Weather() {
                 {data.available_clothes.map(cloth => (
                   <div key={cloth.id} className="cloth-card">
                     <img
-                      src={`https://smart-closet-ai-backend.onrender.com/uploads/${cloth.filename}`}
+                      src={`https://smart-closet-ai.onrender.com/uploads/${cloth.filename}`}
                       alt={cloth.subcategory || cloth.category}
                     />
                     <div style={{

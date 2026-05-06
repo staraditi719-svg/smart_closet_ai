@@ -14,7 +14,7 @@ function StyleProfile() {
   const [season, setSeason] = useState("summer")
 
   useEffect(() => {
-    axios.get("https://smart-closet-ai-backend.onrender.com/api/profile/")
+    axios.get("https://smart-closet-ai.onrender.com/api/profile/")
       .then(res => {
         if (res.data && res.data.name) setProfile(res.data)
       })
@@ -24,7 +24,7 @@ function StyleProfile() {
   const saveProfile = async () => {
     setLoading(true)
     try {
-      await axios.post("https://smart-closet-ai-backend.onrender.com/api/profile/save", null, {
+      await axios.post("https://smart-closet-ai.onrender.com/api/profile/save", null, {
         params: profile
       })
       setSaved(true)
@@ -39,7 +39,7 @@ function StyleProfile() {
     setRecLoading(true)
     setRecommendation("")
     try {
-      const res = await axios.get("https://smart-closet-ai-backend.onrender.com/api/profile/recommend", {
+      const res = await axios.get("https://smart-closet-ai.onrender.com/api/profile/recommend", {
         params: { occasion, season }
       })
       setRecommendation(res.data.recommendation)
