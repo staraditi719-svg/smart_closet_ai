@@ -12,6 +12,7 @@ body {
   color: #E5E4E2;
   min-height: 100vh;
   overflow-x: hidden;
+  width: 100%;
 }
 
 body::before {
@@ -36,9 +37,10 @@ body::before {
 .app {
   position: relative;
   z-index: 1;
-  max-width: 1000px;
-  margin: 0 auto;
-  padding: 0 16px 80px;
+  max-width: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0 24px 80px;
 }
 
 /* HERO SECTION */
@@ -188,6 +190,8 @@ body::before {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
   padding: 16px 0;
   margin-bottom: 8px;
   position: sticky;
@@ -386,7 +390,7 @@ button:disabled {
   border-radius: 14px;
   padding: 18px;
   line-height: 1.8;
-  white-space: pre-wrap;
+  white-space: normal;
   font-size: 14px;
   color: #C0C0C0;
 }
@@ -400,6 +404,47 @@ button:disabled {
   margin-bottom: 16px;
   font-size: 14px;
   line-height: 1.8;
+}
+
+/* MARKDOWN RENDERING */
+.recommendation p {
+  margin-bottom: 10px;
+  font-size: 13px;
+  color: #C0C0C0;
+  line-height: 1.8;
+}
+
+.recommendation strong {
+  color: #A78BFA;
+  font-weight: 600;
+}
+
+.recommendation h1,
+.recommendation h2,
+.recommendation h3 {
+  color: #C0C0C0;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  margin-top: 12px;
+}
+
+.recommendation ul,
+.recommendation ol {
+  margin-left: 20px;
+  margin-bottom: 10px;
+}
+
+.recommendation li {
+  margin-bottom: 6px;
+  color: #C0C0C0;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.recommendation em {
+  color: #9CA3AF;
+  font-style: italic;
 }
 
 /* RESPONSIVE */
@@ -458,52 +503,3 @@ button:disabled {
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: #0B0F19; }
 ::-webkit-scrollbar-thumb { background: #8B5CF6; border-radius: 3px; }
-/* MARKDOWN RENDERING */
-.recommendation p {
-  margin-bottom: 10px;
-  font-size: 13px;
-  color: #C0C0C0;
-  line-height: 1.8;
-}
-
-.recommendation strong {
-  color: #A78BFA;
-  font-weight: 600;
-}
-
-.recommendation h1,
-.recommendation h2,
-.recommendation h3 {
-  color: #C0C0C0;
-  font-size: 14px;
-  font-weight: 600;
-  margin-bottom: 8px;
-  margin-top: 12px;
-}
-
-.recommendation ul,
-.recommendation ol {
-  margin-left: 20px;
-  margin-bottom: 10px;
-}
-
-.recommendation li {
-  margin-bottom: 6px;
-  color: #C0C0C0;
-  font-size: 13px;
-  line-height: 1.7;
-}
-
-.recommendation em {
-  color: #9CA3AF;
-  font-style: italic;
-}
-
-/* Remove white-space pre-wrap for markdown */
-.recommendation {
-  white-space: normal !important;
-}
-.navbar {
-  flex-wrap: wrap;
-  gap: 8px;
-}
